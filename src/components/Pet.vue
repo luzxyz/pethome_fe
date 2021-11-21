@@ -1,7 +1,7 @@
 <template>
     <img class="loading" v-if="!loaded" src="../assets/loading.svg" alt="loading">
 
-    <div class="pet-div-form">
+    <div class="pet-div-form container">
         <button v-if="loaded"  type="button" class="btn btn-add btn-primary float-left" data-bs-toggle="modal" data-bs-target="#addModal"
         v-on:click="addPet">Add new pet</button>
         <input class="form-control filter" v-if="loaded" v-model="nameFilter" v-on:keyup="filterPet" placeholder="Filter by name">
@@ -62,7 +62,7 @@
                                 <input type="file"  name="image" id="image" class="inputfile m-2" accept="image/*" @change="uploadImage"/>
                         </div>
                         <div class="input-group">
-                            <form id="addForm" method="POST" action="<%= BASE_URL %>/pets/add">
+                            <form id="addForm" class="pet-form" method="POST" action="<%= BASE_URL %>/pets/add">
                                 <div class="form-group mb-3">
                                     <input type="text" class="id" v-model="id_pet">
                                     <div class="item">
@@ -449,7 +449,10 @@
         margin: 0 2rem;
         font-weight: bold;
         font-size: 2.5rem;
-        -webkit-text-stroke: 1.5px #8E54E9;
+        text-shadow: -1.5px 1.5px #8E54E9,
+                     1.5px 1.5px #8E54E9,
+                     1.5px -1.5px #8E54E9,
+                     -1.5px -1.5px #8E54E9;
         color: white;
     }
     .hero img {
@@ -517,9 +520,26 @@
             width: 100%;
         }
 
+        .hero{
+            margin: 4rem 0;
+            background-image: unset;
+            min-height: 0vh;
+            display: grid;
+            justify-items: center;
+        }
+
+        .hero .hero-title{
+            font-size: 1.3rem;
+            font-weight: normal;
+            text-shadow: unset;
+            color: #464677;
+        }
+
+
         /** Modal */
 
         .mobile{
+            /** Bootstrap 5 usa !important */
             flex-direction: column !important;
         }
 
@@ -528,9 +548,20 @@
             display: grid;
         }
 
-        #addForm .form-control{
+        .pet-form .form-control{
             margin-left: 0;
         }
+
+        .item:nth-last-child(-n + 2) .form-control{
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .item:nth-last-child(-n + 2) .input-group-text{
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+        
 
     }
 
